@@ -22,6 +22,7 @@
   </style>
 </head>
 <body>
+<main class="app">
   <Dark hack"answer"ai"=ကိုယ်ကြိုက် တာမေး<Darkhack>aiဖြေhackနည်း><button>/div>
     <button class="menu" id="menuBtn" aria-label="မီနူး">☰</button>
     <div class="brand">Kaung AI</div>
@@ -67,8 +68,7 @@
     finally{busy=false;document.querySelector("#sendBtn").disabled=false}}
   document.querySelector("#sendBtn").onclick=send;input.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();send()}});input.addEventListener("input",()=>{input.style.height="auto";input.style.height=Math.min(input.scrollHeight,145)+"px"});
   document.querySelector("#menuBtn").onclick=()=>{document.querySelector("#drawer").classList.toggle("open");drawMemory()};document.querySelector("#closeDrawer").onclick=()=>document.querySelector("#drawer").classList.remove("open");
-  document.querySelector("#clearChat").onclick=()=>{if(confirm("Chat မှတ်တမ်းအားလုံး ဖျက်မလား?")){history=[];save();draw()}};document.querySelector("#clearMemory").onclick=()=>{if(confirm("မှတ်ဉာဏ်အားလုံး ဖျက်မလား?")){memories=[];save();drawMemory()}};
-  document.querySelector("#chatTab").onclick=()=>{document.querySelector("#chatTab").classList.add("active");document.querySelector("#workTab").classList.remove("active");input.placeholder="မေးချင်တာ ရေးပါ…"};document.querySelector("#workTab").onclick=()=>{document.querySelector("#workTab").classList.add("active");document.querySelector("#chatTab").classList.remove("active");input.placeholder="လုပ်စေချင်တာ ရေးပါ…"};
+  document.querySelector("#clearChat").onclick=()=>{if(confirm("Chat မှတ်တမ်းအားလုံး ဖျက်မလား?")){history=[];save();draw()}};document.querySelector("#clearMemory").onclick=()=>{if(confirm("မှတ်ဉာဏ်အားလုံး ဖျက်မလား?")  document.querySelector("#chatTab").onclick=()=>{document.querySelector("#chatTab").classList.add("active");document.querySelector("#workTab").classList.remove("active");input.placeholder="မေးချင်တာ ရေးပါ…"};document.querySelector("#workTab").onclick=()=>{document.querySelector("#workTab").classList.add("active");document.querySelector("#chatTab").classList.remove("active");input.placeholder="လုပ်စေချင်တာ ရေးပါ…"};
   document.querySelector("#speakBtn").onclick=()=>{const last=[...history].reverse().find(m=>m.role==="assistant");if(!last){statusEl.textContent="ဖတ်ပြဖို့ AI အဖြေမရှိသေးပါ။";return}if(!("speechSynthesis" in window)){statusEl.textContent="ဒီ browser အသံဖတ်ခြင်းကို မထောက်ပံ့ပါ။";return}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(last.content);u.lang="my-MM";u.rate=.95;speechSynthesis.speak(u)};
   const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;const mic=document.querySelector("#micBtn");
   if(SpeechRecognition){const rec=new SpeechRecognition();rec.lang="my-MM";rec.interimResults=true;rec.continuous=false;rec.onstart=()=>{mic.classList.add("listening");statusEl.textContent="နားထောင်နေပါတယ်… ပြောပါ။"};rec.onresult=e=>{let t="";for(let i=e.resultIndex;i<e.results.length;i++)t+=e.results[i][0].transcript;input.value=t;input.dispatchEvent(new Event("input"))};rec.onerror=e=>{statusEl.textContent="မိုက်ခရိုဖုန်းအသံဖမ်းမရပါ: "+e.error};rec.onend=()=>{mic.classList.remove("listening");statusEl.textContent="အသံပြောပြီးနောက် ပို့ခလုတ်ကိုနှိပ်ပါ။"};mic.onclick=()=>{try{rec.start()}catch{rec.stop()}}}
