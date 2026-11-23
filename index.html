@@ -48,7 +48,7 @@
 <script>
   // သင့် backend URL ထည့်ပါ။ ဥပမာ: https://your-service.onrender.com/api/chat
   // API key ကို ဒီ HTML ထဲ မထည့်ပါနှင့်။ Backend ရဲ့ environment variable ထဲမှာသာ သိမ်းပါ။
-  const API_URL = "";
+  const API_URL = "https://jetgpt.onrender.com/api/chat";
   const CHAT_KEY = "kaung-ai-chat-v1", MEMORY_KEY = "kaung-ai-memory-v1";
   const messagesEl = document.querySelector("#messages"), input = document.querySelector("#input"), statusEl = document.querySelector("#status");
   let history = readStore(CHAT_KEY, []), memories = readStore(MEMORY_KEY, []), busy = false;
